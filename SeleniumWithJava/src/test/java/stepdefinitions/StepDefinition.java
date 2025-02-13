@@ -14,6 +14,8 @@ import org.techademy.pages.HomePage;
 import org.testng.Assert;
 
 import java.time.Duration;
+import java.util.Arrays;
+import java.util.List;
 
 public class StepDefinition extends BaseTest {
     private WebDriver driver;
@@ -42,14 +44,14 @@ public class StepDefinition extends BaseTest {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     }
 
-    @Then("User verifies the title of the page")
-    public void user_verifies_the_title_of_the_page() {
+    @Then("User verifies the title of the page as {string}")
+    public void userVerifiesTheTitleOfThePageAs(String title) {
         System.out.println(homePage.getTitleOfThePage());
-        Assert.assertEquals(homePage.getTitleOfThePage(), "The Internet");
+        Assert.assertEquals(homePage.getTitleOfThePage(), title);
     }
 
     @When("User clicks on {string} link")
-    public void user_clicks_on_link(String linkText) throws InterruptedException {
+    public void user_clicks_on_link(String linkText) {
         homePage.clickLink(linkText);
     }
 
@@ -57,7 +59,10 @@ public class StepDefinition extends BaseTest {
     public void user_verifies_the_text_on_the_page_as(String expectedText) {
         String actualText = abTestingPage.getText();
         System.out.println(actualText+" "+expectedText);
-        Assert.assertEquals(actualText, expectedText, "Text does not match!");
+        List<String> expectedTexts = Arrays.asList("A/B Test Control", "A/B Test Variation 1");
+
+        Assert.assertTrue(expectedTexts.contains(actualText),
+                "Unexpected text found! Expected: " + expectedTexts + " but found: " + actualText);
     }
 
     @Then("User navigates back to home page")

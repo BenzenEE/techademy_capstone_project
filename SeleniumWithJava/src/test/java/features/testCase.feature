@@ -4,7 +4,7 @@ Feature: UI automation of webapp
     Given User navigates to the mentioned page
 
   Scenario: Verify the title of the page
-    Then User verifies the title of the page
+    Then User verifies the title of the page as "The Internet"
 
     Scenario: Verify A/B testing link
       When User clicks on "A/B Testing" link
