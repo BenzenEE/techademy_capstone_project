@@ -33,4 +33,3 @@ def test_file_upload(driver):
     file_input.send_keys(r"C:\Users\SAYAN DAS\Downloads\capstone_project.pdf")
 
     driver.find_element(By.ID, "file-submit").click()
-

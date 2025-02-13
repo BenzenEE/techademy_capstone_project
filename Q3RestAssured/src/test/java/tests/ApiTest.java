@@ -26,9 +26,8 @@ public class ApiTest {
 
         RestAssured.baseURI = "https://restcountries.com/v3.1/translation";
 
-        Response response = given().when().get("/"+language).then().extract().response();
+        Response response = given().when().get("/"+language)
+                .then().statusCode(200).extract().response();
         System.out.println(response.asPrettyString());
-
-        Assert.assertEquals(response.getStatusCode(), 200);
     }
 }
